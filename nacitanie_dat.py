@@ -4,31 +4,43 @@ with open ("vstupne_udaje/map_data_0.json") as file:
     dictionary =json.load(file)
 
 
-def coordinates():
-    objects = dictionary.pop("object")
+def x_coordinates():
+    objects = dictionary["object"]
 
     x_coordinates = []
-    y_coordinates = []
 
     for object in objects:
         x_coordinates1 = []
-        y_coordinates1 = []
         coordinates = object["coordinates"]
         for numbers in coordinates:
             x_coordinate = numbers[0]
-            y_coordinate = numbers[1]
             x_coordinates1.append(x_coordinate)
-            y_coordinates1.append(y_coordinate)
 
         x_coordinates.append(x_coordinates1)
+
+    return(x_coordinates)
+
+
+def y_coordinates():
+    objects = dictionary.pop("object")
+    y_coordinates = []
+
+    for object in objects:
+        y_coordinates1 = []
+        coordinates = object["coordinates"]
+        for numbers in coordinates:
+            y_coordinate = numbers[1]
+            y_coordinates1.append(y_coordinate)
+
         y_coordinates.append(y_coordinates1)
 
-    print(x_coordinates)
-    print(y_coordinates)
+    return(y_coordinates)
+
 
 
 def main():
-    coordinates()
+    print(x_coordinates())
+    print(y_coordinates())
 
 if __name__ == "__main__":
     main()
