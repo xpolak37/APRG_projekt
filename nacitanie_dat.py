@@ -35,12 +35,3 @@ def y_coordinates():
         y_coordinates.append(y_coordinates1)
 
     return(y_coordinates)
-
-
-
-def main():
-    print(x_coordinates())
-    print(y_coordinates())
-
-if __name__ == "__main__":
-    main()
