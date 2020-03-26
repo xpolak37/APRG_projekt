@@ -35,3 +35,16 @@ def y_coordinates():
         y_coordinates.append(y_coordinates1)
 
     return(y_coordinates)
+
+def start_position():
+    paths = dictionary2["path"]
+    our_path = paths[path_number]
+    start_position = our_path["start"]
+    return(start_position)
+
+
+def end_position():
+    paths = dictionary2["path"]
+    our_path = paths[path_number]
+    end_position = our_path["end"]
+    return (end_position)
