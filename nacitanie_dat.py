@@ -2,7 +2,10 @@ import json
 
 with open ("vstupne_udaje/map_data_0.json") as file:
     dictionary =json.load(file)
+with open ("vstupne_udaje/test_path.json") as file2:
+    dictionary2 = json.load(file2)
 
+path_number = 0
 
 def x_coordinates():
     objects = dictionary["object"]

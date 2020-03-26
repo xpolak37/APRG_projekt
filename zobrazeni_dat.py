@@ -25,4 +25,3 @@ def graph():
     plt.scatter(end_x, end_y, color = "black", s = 70)
     plt.tight_layout()
     return(plt.show())
-
