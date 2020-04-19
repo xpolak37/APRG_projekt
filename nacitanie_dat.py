@@ -53,4 +53,4 @@ def end_position():
     path_index = config.path_index
     our_path = paths[path_index]
     end_position = our_path["end"]
-    return (end_position)
+    return end_position
