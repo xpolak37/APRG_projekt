@@ -1,18 +1,17 @@
-import json
+import config
 
-with open ("vstupne_udaje/map_data_0.json") as file:
-    dictionary = json.load(file)
+def coordinates():
+    objects = config.map_dictionary["object"]
+    coordinates = []
+    for object in objects:
+        coordinates1 = object["coordinates"]
+        coordinates.append(coordinates1)
+    return coordinates
 
-with open ("vstupne_udaje/test_path.json") as file2:
-    dictionary2 = json.load(file2)
-
-path_number = 0
 
 def x_coordinates():
-    objects = dictionary["object"]
-
+    objects = config.map_dictionary["object"]
     x_coordinates = []
-
     for object in objects:
         x_coordinates1 = []
         coordinates = object["coordinates"]
@@ -22,11 +21,11 @@ def x_coordinates():
 
         x_coordinates.append(x_coordinates1)
 
-    return(x_coordinates)
+    return x_coordinates
 
 
 def y_coordinates():
-    objects = dictionary["object"]
+    objects = config.map_dictionary["object"]
     y_coordinates = []
 
     for object in objects:
@@ -38,18 +37,20 @@ def y_coordinates():
 
         y_coordinates.append(y_coordinates1)
 
-    return(y_coordinates)
+    return y_coordinates
 
 
 def start_position():
-    paths = dictionary2["path"]
-    our_path = paths[path_number]
+    paths = config.path_dictionary["path"]
+    path_index = config.path_index
+    our_path = paths[path_index]
     start_position = our_path["start"]
-    return(start_position)
+    return start_position
 
 
 def end_position():
-    paths = dictionary2["path"]
-    our_path = paths[path_number]
+    paths = config.path_dictionary["path"]
+    path_index = config.path_index
+    our_path = paths[path_index]
     end_position = our_path["end"]
     return (end_position)
