@@ -100,17 +100,20 @@ for i in coordinates():
 convex_hulls = []
 for object in objects:
     all_coordinates = object
-    P0 = finding_P0(all_coordinates)                       #vyvola funkciu na hladanie P0
-    all_coordinates.remove(P0)                             #vymaze P0 zo suradnic
-    sorted_coordinates = sorting(P0,all_coordinates)        #vyvola funkciu na zoradenie suradnic podla velkosti uhla
+    #vyhlada P0:
+    P0 = finding_P0(all_coordinates)
+    # vymaze P0 zo suradnic:
+    all_coordinates.remove(P0)
+    #zoradi suradnice podla velkosti uhla:
+    sorted_coordinates = sorting(P0,all_coordinates)
 
-    # zoradenie vsetkeho do jedneho zoznamu "points"
+    #zoradenie vsetkeho do jedneho zoznamu "points"
     points = []
     points.append(P0)
     for coordinates in sorted_coordinates:
         points.append(coordinates)
 
-    convex_hull = check(points,P0)            #vyvola funkciu kontrola bodov a ziska suradnice konvexnej obalky
+    #kontrola bodov
+    convex_hull = check(points,P0)
+    #jednotlive konvexne obalky sa ulozia do zoznamu convex_hulls
     convex_hulls.append(convex_hull)
-
-#vysledok: convex_hulls
