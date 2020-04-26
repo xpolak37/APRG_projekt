@@ -1,5 +1,9 @@
 import config
 
+def map_name():
+    map_name = config.map_dictionary["map_name"]
+    return map_name
+
 def coordinates():
     objects = config.map_dictionary["object"]
     coordinates = []

@@ -4,7 +4,7 @@ import nacitanie_dat
 from matplotlib import pyplot as plt
 
 def graph():
-    plt.figure("Prekazkova draha")
+    plt.figure(map_name)
     # nakresli jednotlive prekazky
     for i in range(len(x_coordinates)):
         plt.scatter(x_coordinates[i], y_coordinates[i], color="black", s=20, zorder=2)
@@ -43,3 +43,5 @@ x_coordinates = nacitanie_dat.x_coordinates()
 y_coordinates = nacitanie_dat.y_coordinates()
 start_position = nacitanie_dat.start_position()
 end_position = nacitanie_dat.end_position()
+map_name =nacitanie_dat.map_name()
+graph()
