@@ -4,7 +4,7 @@ import nacitanie_dat
 from matplotlib import pyplot as plt
 
 def graph():
-
+    plt.figure("Prekazkova draha")
     # nakresli jednotlive prekazky
     for i in range(len(x_coordinates)):
         plt.scatter(x_coordinates[i], y_coordinates[i], color="black", s=20, zorder=2)
