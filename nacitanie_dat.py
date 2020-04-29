@@ -1,10 +1,12 @@
 import config
 
 def map_name():
+    """Nacita nazov mapy"""
     map_name = config.map_dictionary["map_name"]
     return map_name
 
 def coordinates():
+    """Nacita body vsetkych prekazok"""
     objects = config.map_dictionary["object"]
     coordinates = []
     for object in objects:
@@ -14,6 +16,7 @@ def coordinates():
 
 
 def x_coordinates():
+    """Nacita x- suradnice bodov prekazok"""
     objects = config.map_dictionary["object"]
     x_coordinates = []
     for object in objects:
@@ -29,6 +32,7 @@ def x_coordinates():
 
 
 def y_coordinates():
+    """Nacita y- suradnice bodov prekazok"""
     objects = config.map_dictionary["object"]
     y_coordinates = []
 
@@ -45,6 +49,7 @@ def y_coordinates():
 
 
 def start_position():
+    """Nacita start"""
     paths = config.path_dictionary["path"]
     path_index = config.path_index
     our_path = paths[path_index]
@@ -53,6 +58,7 @@ def start_position():
 
 
 def end_position():
+    """Nacita ciel"""
     paths = config.path_dictionary["path"]
     path_index = config.path_index
     our_path = paths[path_index]
