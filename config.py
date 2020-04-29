@@ -1,7 +1,9 @@
 import json
 import zobrazenie_dat
 
-with open("vstupne_udaje/map_data_1.json") as map_file:  # toto skusit dat prec dat do config file
+#nastavenie mapy s prekazkami a cesty
+
+with open("vstupne_udaje/map_data_1.json") as map_file:
     map_dictionary = json.load(map_file)
 
 with open("vstupne_udaje/test_path.json") as path_file:
