@@ -8,20 +8,22 @@ for i in convex_hulls:
     konvexne_obalky.append(i[:])
 start = start_position()
 end = end_position()
-
 inf = float("inf")
 
 
 def get_distance(p1, p2):
+    """vypocita vzdialenost dvoch bodov"""
     return math.sqrt(((p1[0] - p2[0]) ** 2) + ((p1[1] - p2[1]) ** 2))
 
 
-def which_side_points(a, b, c):
-    d = (c[1] - a[1]) * (b[0] - a[0]) - (b[1] - a[1]) * (c[0] - a[0])
-    return 1 if d > 0 else (-1 if d < 0 else 0)
+def which_side(a, b, c):
+    """Zisti na ktorej strane usecky (ab) sa nachadza vybrany bod (c)"""
+    side = (c[1] - a[1]) * (b[0] - a[0]) - (b[1] - a[1]) * (c[0] - a[0])
+    return 1 if side > 0 else (-1 if side < 0 else 0)
 
 
-def is_point_in_closed_segment(a, b, c):
+def point_in_segment(a, b, c):
+    """Zisti ci bod (c) lezi na usecke (ab)"""
     if a[0] < b[0]:
         return a[0] <= c[0] <= b[0]
     if b[0] < a[0]:
@@ -36,35 +38,31 @@ def is_point_in_closed_segment(a, b, c):
 
 
 def segment_intersection(a, b, c, d):
+    """Zisti ci sa usecky (ab) a (cd) pretinaju"""
     if a == b:
         return a == c or a == d
     if c == d:
         return c == a or c == b
 
-    s1 = which_side_points(a, b, c)
-    s2 = which_side_points(a, b, d)
+    s1 = which_side(a, b, c)
+    s2 = which_side(a, b, d)
 
     if s1 == 0 and s2 == 0:
-        return \
-            is_point_in_closed_segment(a, b, c) or is_point_in_closed_segment(a, b, d) or \
-            is_point_in_closed_segment(c, d, a) or is_point_in_closed_segment(c, d, b)
+        return point_in_segment(a, b, c) or point_in_segment(a, b, d) or point_in_segment(c, d, a) or point_in_segment(c, d, b)
 
     if s1 and s1 == s2:
         return False
 
-    s1 = which_side_points(c, d, a)
-    s2 = which_side_points(c, d, b)
+    s1 = which_side(c, d, a)
+    s2 = which_side(c, d, b)
 
     if s1 and s1 == s2:
         return False
 
     return True
 
-
-def which_side(line, point):
-    return (point[0] - line[0][0]) * (line[1][1] - line[0][1]) - (point[1] - line[0][1]) * (line[1][0] - line[0][0])
-
 def object_control():
+    """Ziska prekazky, ktore stoja v ceste"""
     relevant_objects = []
     for i in konvexne_obalky:
         object = i
@@ -83,6 +81,7 @@ def object_control():
     return relevant_objects
 
 def get_closest_point(relevant_objects):
+    """Najde najblizsi bod"""
     min_distance = inf
     closest_point = [inf, inf]
     for object in relevant_objects:  # vyberie najblizsi bod z prekazok ktore stoja v ceste
@@ -119,17 +118,13 @@ while not path[-1] == end:
     relevant_objects = object_control()
 
     if len(relevant_objects) == 0:
-            path.append(end)
+        path.append(end)
 
     else:
         closest_point, closest_object = get_closest_point(relevant_objects)
         for point in closest_object:
-            line = [start, end]
-            det = which_side(line, point)
-            if det > 0:
-                point.append(1)
-            else:
-                point.append(-1)
+            side = which_side(start,end, point)
+            point.append(side)
 
         sign = closest_point[-1]                #na ktorej strane je closest_point
         closest_point.pop(-1)
