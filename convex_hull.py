@@ -3,7 +3,9 @@ from math import pi
 from collections import deque
 from nacitanie_dat import coordinates
 
+
 def finding_P0(all_coordinates):
+    """Najde najnizsie polozeny bod v prekazke (P0)"""
     min_y = all_coordinates[0][1]
     x_coordinate = all_coordinates[0][0]
     for coordinates in all_coordinates:
@@ -17,7 +19,8 @@ def finding_P0(all_coordinates):
 
 #zoradenie podla uhlu
 def sorting(P0,all_coordinates):
-    #vypocet uhlu
+    """zoradi body v prekazke podla uhla voci bodu P0"""
+    #vypocet uhla
     for coordinates in all_coordinates:
         if coordinates[0] < P0[0]:
             dif_x = P0[0] - coordinates[0]
@@ -48,6 +51,7 @@ def value(list):
 
 #kontrola bodov pomocou zásobníka
 def check(points,P0):
+    """kontroluje jednotlive body prekazky a vytvara konvexnu obalku"""
     convex_hull = []
     S = deque()
     for i in range(3):
@@ -93,6 +97,7 @@ def check(points,P0):
 
     return convex_hull
 
+#riadiaca funkcia
 objects = []
 for i in coordinates():
     objects.append(i[:])
@@ -100,14 +105,11 @@ for i in coordinates():
 convex_hulls = []
 for object in objects:
     all_coordinates = object
-    #vyhlada P0:
     P0 = finding_P0(all_coordinates)
-    # vymaze P0 zo suradnic:
     all_coordinates.remove(P0)
-    #zoradi suradnice podla velkosti uhla:
     sorted_coordinates = sorting(P0,all_coordinates)
 
-    #zoradenie vsetkeho do jedneho zoznamu "points"
+    #ulozenie P0 a zoradenych bodov do jedneho zoznamu "points"
     points = []
     points.append(P0)
     for coordinates in sorted_coordinates:
