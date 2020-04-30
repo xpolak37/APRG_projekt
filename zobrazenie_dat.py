@@ -12,7 +12,9 @@ def graph():
 
     # nakresli start a end
     plt.scatter(start_position[0], start_position[1], color="black", s=70)
+    plt.text(start_position[0] - 2, start_position[1] - 4, "START", fontsize=6)
     plt.scatter(end_position[0], end_position[1], color="black", s=70)
+    plt.text(end_position[0] - 1.5, end_position[1] - 4, "END", fontsize=6)
 
     # nakresli konvexne obalky
     for convex_hull in convex_hulls:
