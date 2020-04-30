@@ -3,14 +3,6 @@ from nacitanie_dat import start_position
 from nacitanie_dat import end_position
 from convex_hull import convex_hulls
 
-konvexne_obalky = []
-for i in convex_hulls:
-    konvexne_obalky.append(i[:])
-start = start_position()
-end = end_position()
-inf = float("inf")
-
-
 def get_distance(p1, p2):
     """vypocita vzdialenost dvoch bodov"""
     return math.sqrt(((p1[0] - p2[0]) ** 2) + ((p1[1] - p2[1]) ** 2))
@@ -64,18 +56,18 @@ def segment_intersection(a, b, c, d):
 def object_control():
     """Ziska prekazky, ktore stoja v ceste"""
     relevant_objects = []
-    for i in konvexne_obalky:
+    for i in convex_obstacles:
         object = i
-        priesecnik = []
+        intersection = []
         for j in range(len(object) - 1):
             point_1 = object[j]
             point_2 = object[j + 1]
             if start == point_1 or start == point_2:  # neberie do uvahy stranu v ktorej sa nachadza start
                 continue
             if segment_intersection(point_1, point_2, start, end):
-                priesecnik.append(1)
+                intersection.append(1)
 
-        if len(priesecnik) > 0:
+        if len(intersection) > 0:
             relevant_objects.append(i)
 
     return relevant_objects
@@ -109,7 +101,14 @@ def get_closest_point(relevant_objects):
 
 
 #riadiaca funkcia
-for obstacle in konvexne_obalky:
+convex_obstacles = []
+for i in convex_hulls:
+    convex_obstacles.append(i[:])
+start = start_position()
+end = end_position()
+inf = float("inf")
+
+for obstacle in convex_obstacles:
     obstacle.pop(-1)
 
 path = [start]
