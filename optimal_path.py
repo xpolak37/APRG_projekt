@@ -15,40 +15,37 @@ def which_side(a, b, c):
 
 
 def point_in_segment(a, b, c):
-    """Zisti ci bod (c) lezi na usecke (ab)"""
+    """Zisti ci bod (c) lezi na usecke (ab) v pripade, ze bod c lezi na priamke (ab)"""
+    #bod "c" musi lezat medzi bodmi "a" a "b"
     if a[0] < b[0]:
         return a[0] <= c[0] <= b[0]
     if b[0] < a[0]:
         return b[0] <= c[0] <= a[0]
 
+    #v pripade, ze body "a" a "b" maju rovnake x-suradnice
     if a[1] < b[1]:
         return a[1] <= c[1] <= b[1]
     if b[1] < a[1]:
         return b[1] <= c[1] <= a[1]
 
-    return a[0] == c[0] and a[1] == c[1]
-
 
 def segment_intersection(a, b, c, d):
-    """Zisti ci sa usecky (ab) a (cd) pretinaju"""
-    if a == b:
-        return a == c or a == d
-    if c == d:
-        return c == a or c == b
+    """Zisti ci sa usecky (ab) a (cd/nasa cesta) pretinaju"""
+    side_1 = which_side(a, b, c)
+    side_2 = which_side(a, b, d)
 
-    s1 = which_side(a, b, c)
-    s2 = which_side(a, b, d)
+    if side_1 == 0 and side_2 == 0:
+        return \
+            point_in_segment(a, b, c) or point_in_segment(a,b,d) or point_in_segment(c, d, a) \
+            or point_in_segment(c, d, b)
 
-    if s1 == 0 and s2 == 0:
-        return point_in_segment(a, b, c) or point_in_segment(a, b, d) or point_in_segment(c, d, a) or point_in_segment(c, d, b)
-
-    if s1 and s1 == s2:
+    if side_1 == side_2:
         return False
 
-    s1 = which_side(c, d, a)
-    s2 = which_side(c, d, b)
+    side_1 = which_side(c, d, a)
+    side_2 = which_side(c, d, b)
 
-    if s1 and s1 == s2:
+    if side_1 == side_2:
         return False
 
     return True
